@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: download nodejs 7.x
+      shell: curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+      become: yes
+
+    - name: install nodejs
+      apt: name=nodejs state=present update_cache=yes
+      become: yes
+
+    - name: copy bashrc
+      copy:
+        src: ./files/.bashrc
+        dest: ~/.bashrc
